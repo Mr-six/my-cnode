@@ -1,0 +1,39 @@
+// corlor
+$theme: #80bd01;
+$theme-dark: darken($theme, 10%);
+$top: #e74c3c;
+$good: #e67e22;
+$share: #1abc9c;
+$ask: #3498db;
+$job: #9b59b6;
+$dark: #000;
+$grey: #aaa;
+$grey-light: #e1e1e1;
+$code: #f0f0f0;  // 代码颜色
+$link: #0366d6;  // 链接颜色
+$up: #e64536;  // 点赞后的颜色
+// 返回顶部
+$gotop-bg: transparent;
+$gotop: rgba(#ccc, 0.5);
+
+// aside-left
+$aside-bg: #656D78;
+$aside-menu-bg: #434a54;
+
+.theme {
+  color: $theme;
+}
+.grey {
+  color: $grey;
+}
+.grey-light {
+  color: $grey-light;
+}
+.up {
+  color: $up;
+}
+
+
+
+// size
+$page-space: 0.2rem;

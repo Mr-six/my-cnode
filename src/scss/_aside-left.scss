@@ -1,0 +1,71 @@
+.addition-aside{
+  height: 100vh;
+}
+.aside-left{
+  position: fixed;
+  top: 0;
+  width: 50%;
+  left: -50%;
+  bottom: 0;
+  background: $aside-bg;
+  z-index: 2;
+  // avatar
+  & .avatar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 5vw;
+    padding-bottom: 5vw;
+    & >a{
+      display: block;
+    }
+    & img{
+      width: 30vw;
+      height: 30vw;
+      border-radius: 50%;
+      border: 1px solid #fff;
+    }
+    & p{
+      color: #fff;
+      text-align: center;
+      margin: 5vw 0 0 0;
+    }
+  }
+  /*menu*/
+  & .aside-menu{
+    background: $aside-menu-bg;
+    margin: 0;
+    padding: 2vh;
+    & li{
+      // padding: 2vh 0 2vh 10vw;
+      & >a{
+        display: inline-block;
+        padding: 2vh 0 2vh 10vw;
+        width: 100%;
+        color: #fff;
+        & .fa{
+          padding-right: 3vw;
+        }
+      }
+    }
+    // 分割线
+    .divider {
+      border-bottom: 1px solid #333;
+      margin: 0.2rem 0;
+    }
+  }
+}
+/*mask*/
+.mask{
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  &.active{
+    background: rgba(#000, 0.5);
+    transition: background 0.2s ease;
+  }
+}

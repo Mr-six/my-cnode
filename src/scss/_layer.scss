@@ -1,0 +1,19 @@
+.layer-msg {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%,-50%,0);
+  transition: all 0.3s;
+  background: rgba(#000, 0.2);
+  padding: 0.2rem 0.3rem;
+  border-radius: 0.1rem;
+  max-width: 50%;
+  &.layer-msg-show{
+    opacity: 1;
+  }
+  &.layer-msg-hide{
+    opacity: 0;
+    // transform: scale(0.2, 0.2);
+  }
+}

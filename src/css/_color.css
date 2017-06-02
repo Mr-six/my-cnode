@@ -1,0 +1,35 @@
+/*color config*/
+:root{
+  --theme: #80bd01;
+  --top: #e74c3c;
+  --good: #e67e22;
+  --share: #1abc9c;
+  --ask: #3498db;
+  --job: #9b59b6;
+  /*auxiliary color*/
+  --dark: #000;
+  --grey: #aaa;
+  --grey-light: #e1e1e1;
+}
+
+.theme{
+  color: var(--theme);
+}
+/*.good{
+  color: var(--good);
+}
+.share{
+  color: var(--share);
+}
+.ask{
+  color: var(--ask);
+}
+.job{
+  color: var(--job);
+}*/
+.grey {
+  color: var(--grey);
+}
+.grey-light{
+  color: var(--grey-light);
+}

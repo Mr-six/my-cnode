@@ -1,0 +1,83 @@
+#topices{
+  & ul{
+    margin: 0;
+    padding: 0;
+  }
+  & li{
+    padding: 0.2rem;
+    border-bottom: 1px solid var(--grey-light);
+    margin-bottom: 0.2rem;
+    & .topices-content{
+      margin-top: 0.2rem;
+    }
+  }
+}
+
+/*作者信息*/
+.author{
+  & .author-name{
+    font-size: 0.26rem;
+  }
+  & img{
+    border-radius: 50%;
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+  & p{
+    margin: 0.1rem 0 0.1rem 0.2rem;
+  }
+}
+
+
+/*主题*/
+.topic{
+  padding: 0.5rem 0.2rem;
+}
+/*主题头部*/
+.topic-head{
+  /*标题部分*/
+  & h3{
+    font-size: 0.3rem;
+    margin-bottom: 0.2rem;
+    &:before{
+      font-size: 0.24rem;
+      line-height: 0.45rem;
+      color: #fff;
+      display: inline-block;
+      padding: 0.01rem 0.1rem;
+      margin-right: 10px;
+      border-radius: 0.04rem;
+      background: var(--top);
+      content: attr(title);
+    };
+    &.good{
+      &:before{
+        background: var(--good);
+      }
+    }
+    &.ask{
+      &:before{
+        background: var(--ask);
+      }
+    }
+    &.job{
+      &:before{
+        background: var(--job);
+      }
+    }
+  }
+}
+/*主题内容*/
+.topic-content{
+  margin-top: 0.2rem;
+}
+
+/*主题回复*/
+.topic-reply{
+  margin: 0.2rem 0;
+  padding: 0.2rem 0;
+  border-bottom: 1px solid var(--grey);
+  &:last-child{
+    border: none;
+  }
+}

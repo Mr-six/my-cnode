@@ -1,0 +1,60 @@
+.user-info{
+  .avatar-bg{
+    // 头像背景图
+    >img{
+      width: 100%;
+      height: 4rem;
+    }
+    margin-bottom: -0.8rem;
+    // 头像图片
+    .avatar{
+      transform: translate3d(0, -50%,0);
+      img{
+        border-radius: 50%;
+        border: 3px solid #fff;
+        width: 2rem;
+      }
+      // 用户名
+      p{
+        transform: translate3d(0, 50%,0);
+      }
+    }
+  }
+  // 内容区
+  .user-info-content{
+    // 用户创建时间
+    .user-create, .user-topics, .tab-btn li{
+      padding: $page-space;
+    }
+    // tab-btn
+    .tab-btn{
+      border-top: 1px solid $grey;
+      border-bottom: 1px solid $grey;
+      margin: $page-space 0;
+      >li{
+        width: 50%;
+        text-align: center;
+        &:first-child{
+          border-right: 1px solid $grey;
+        }
+        // 选中状态
+        &.selected{
+          color: $theme;
+        }
+      }
+    }
+    // 用户主题
+    .user-topics{
+      li{
+        border-bottom: 1px solid $grey-light;
+        padding: 0.1rem 0;
+        &:first-child{
+          border-top: none;
+        }
+        &:last-child{
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}

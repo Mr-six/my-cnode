@@ -1,0 +1,95 @@
+<template>
+  <div class="user-info">
+    <div v-if="user.loginname">
+      <!-- 头像背景 -->
+      <div class="avatar-bg">
+        <img src="http://lzxb.name/vue-cnode/static/images/headimg-bg.55bfe251347ce829af67d68847a6806c.jpg" alt="头像背景图">
+        <div class="avatar flex-center-v">
+          <img :src="user.avatar_url" alt="用户头像">
+          <p>{{ user.loginname }}</p>
+          <!-- 注册时间 -->
+        </div>
+      </div>
+      <!-- user-content -->
+      <div class="user-info-content">
+        <div class="flex-center-h user-create">
+          <p>注册时间：{{ user.create_at | formatDate }}</p>
+          <p class="theme">积分：{{ user.score }}</p>
+        </div>
+        <ul class="tab-btn flex-center-h">
+          <li :class="{selected: tabIndex === 0}" @click="tabIndex = 0">文章</li>
+          <li :class="{selected: tabIndex === 1}" @click="tabIndex = 1">回复</li>
+        </ul>
+        <ul class="user-topics">
+          <!-- 用户发布的主题 -->
+          <com-list
+            v-show="tabIndex === 0"
+            v-for="reply in user.recent_topics"
+            :reply="reply"
+            :key="reply.id">
+          </com-list>
+          <!-- 用户回帖 -->
+          <com-list
+            v-show="tabIndex === 1"
+            v-for="reply in user.recent_replies"
+            :reply="reply"
+            :key="reply.id">
+          </com-list>
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import api from '../api/'
+  import comList from '../components/com-list'
+  import comMixin from '../mixins/com-mixin'
+  export default {
+    mixins: [comMixin],
+    data () {
+      return {
+        tabIndex: 0,
+        user: {}
+      }
+    },
+
+    created () {
+      this.getUserData()
+    },
+
+    mounted () {
+      let comm_conf = {menu: false, back: true, title: '个人中心', plus: false}
+      if (this.hasToken) {
+        comm_conf = Object.assign(comm_conf, {logout: true})
+      }
+      this.$store.dispatch('commConf', comm_conf)
+    },
+
+    methods: {
+      getUserData () {
+        this.startLoading()  // 显示加载
+        let {$route} = this
+        let name = $route.params.name
+        api.getUuser(name)
+          .then(({data}) => {
+            if (data && data.success) {
+              this.user = data.data
+              this.stopLoading()  // 暂停loading
+            }
+          })
+          .catch((err) => {
+            this.errShow(err)
+          })
+      }
+    },
+
+    watch: {  // 当前路由跳转
+      $route: 'getUserData'
+    },
+
+    components: {
+      comList
+    }
+  }
+</script>

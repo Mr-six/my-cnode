@@ -1,0 +1,20 @@
+.flex{
+  display: flex;
+}
+/*space between*/
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+/*center horizontal*/
+.flex-center-h{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/*all center*/
+.flex-center-all{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,19 @@
+// 路由切换效果
+.slide-left-enter-active, .slide-right-enter-active {
+  transition: all .3s ease;
+}
+.slide-left-enter{
+  opacity: 0;
+  transform: translate(2rem, 0);
+}
+.slide-right-enter{
+  opacity: 0;
+  transform: translate(-2rem, 0);
+}
+// 渐隐效果
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}

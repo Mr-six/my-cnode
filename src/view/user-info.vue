@@ -12,10 +12,12 @@
       </div>
       <!-- user-content -->
       <div class="user-info-content">
+        <!-- 用户注册时间 -->
         <div class="flex-center-h user-create">
           <p>注册时间：{{ user.create_at | formatDate }}</p>
           <p class="theme">积分：{{ user.score }}</p>
         </div>
+        <!-- 用户发布及回复 -->
         <ul class="tab-btn flex-center-h">
           <li :class="{selected: tabIndex === 0}" @click="tabIndex = 0">文章</li>
           <li :class="{selected: tabIndex === 1}" @click="tabIndex = 1">回复</li>
@@ -59,15 +61,17 @@
     },
 
     mounted () {
+      let {getUser, $store, $route} = this
+      let name = $route.params.name
       let comm_conf = {menu: false, back: true, title: '个人中心', plus: false}
-      if (this.hasToken) {
-        comm_conf = Object.assign(comm_conf, {logout: true})
+      if (getUser && getUser.loginname === name) {  // 判断是否为当前登录用户
+        comm_conf = Object.assign(comm_conf, {logout: true})  // 显示退出
       }
-      this.$store.dispatch('commConf', comm_conf)
+      $store.dispatch('commConf', comm_conf)
     },
 
     methods: {
-      getUserData () {
+      getUserData () {  // 获取用户基本数据
         this.startLoading()  // 显示加载
         let {$route} = this
         let name = $route.params.name

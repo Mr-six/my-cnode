@@ -21,8 +21,8 @@
       display: block;
     }
     & img{
-      width: 30vw;
-      height: 30vw;
+      width: 25vw;
+      height: 25vw;
       border-radius: 50%;
       border: 1px solid #fff;
     }
@@ -30,6 +30,17 @@
       color: #fff;
       text-align: center;
       margin: 5vw 0 0 0;
+    }
+    // 收藏和消息
+    .collect-msg{
+      a {
+        display: inline-block;
+        width: 1.5rem;
+        margin-top: 0.2rem;
+        text-align: center;
+        font-size: 0.24rem;
+        color: #fff;
+      }
     }
   }
   /*menu*/

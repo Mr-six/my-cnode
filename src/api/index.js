@@ -109,6 +109,7 @@ export default {
    * @return {promise}            {"success": true}
    */
   getCollectTopic (loginname) {
+    console.log(loginname)
     return axios.get('/api/topic_collect/' + loginname)
   },
 
@@ -119,8 +120,8 @@ export default {
    * @param  {String} reply_id    如果这个评论是对另一个评论的回复，请务必带上此字段 这样前端就可以构建出评论线索图
    * @return {promise}            {success: true, reply_id: '5433d5e4e737cbe96dcef312'}
    */
-  createReplies ({accesstoken, content, reply_id}) {
-    return axios.post('/api/topic/:topic_id/replies', {
+  createReplies ({accesstoken, content, topic_id, reply_id}) {
+    return axios.post('/api/topic/' + topic_id + '/replies', {
       accesstoken: accesstoken,
       content: content,
       reply_id: reply_id

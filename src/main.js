@@ -25,7 +25,7 @@ Object.keys(filters).forEach(k => Vue.filter(k, filters[k])) // 注册过滤器
 // 登录检测
 router.beforeEach(({meta, path}, from, next) => {
   const {auth = false} = meta
-  const isLogin = Boolean(store.state.accesstoken)  // 检测用户是否已经登录
+  const isLogin = Boolean(store.getters.getUser)  // 检测用户是否已经登录
   if (auth && !isLogin && path !== '/login') {
     let to = {path: '/login'}
     return next(to)  // 中断导航，跳转到登录界面

@@ -5,13 +5,13 @@
       <dd>该项目是基于Cnodejs的api，采用vue.js重写的webapp。</dd>
       <dt>源码地址</dt>
       <dd>
-        <a href="https://github.com/shinygang/Vue-cnodejs">
-          https://github.com/shinygang/Vue-cnodejs
+        <a href="https://github.com/Mr-six/my-cnode">
+          https://github.com/Mr-six/my-cnode
         </a>
       </dd>
       <dt>意见反馈</dt>
       <dd>
-        <a href="https://github.com/shinygang/Vue-cnodejs/issues">
+        <a href="https://github.com/Mr-six/my-cnode/issues">
           发表意见或者提需求
         </a>
       </dd>

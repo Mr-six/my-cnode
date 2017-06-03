@@ -25,7 +25,7 @@
     },
 
     mounted () {
-      this.$store.dispatch('commConf', {menu: false, back: true, title: '登录'})
+      this.$store.dispatch('commConf', {menu: false, back: true, title: '登录', plus: false, logout: false})
     },
 
     methods: {

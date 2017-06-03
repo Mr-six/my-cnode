@@ -31,7 +31,9 @@
         <li class="bor-both">
           <span class="theme">{{topic.replies.length}}</span> 回复
         </li>
-        <com-list v-for="reply in topic.replies" :key="reply.id" :reply="reply" class="topic-reply"></com-list>
+        <com-list v-for="reply in topic.replies" :key="reply.id" :reply="reply" class="topic-reply" @close="closeComment" @updata="getTopic"></com-list>
+        <!-- 回复框 -->
+        <com-replies v-if="hasToken" @updata="getTopic" class="reply-topic"></com-replies>
       </ul>
     </div>
 
@@ -42,6 +44,7 @@
   import api from '../api/'
   import utils from '../utils/utils'
   import comList from '../components/com-list'
+  import comReplies from '../components/com-replies'
   import comMixin from '../mixins/com-mixin'
   export default {
     mixins: [comMixin],
@@ -63,25 +66,29 @@
       this.getConf.accesstoken = this.hasToken || ''  // 添加token
       this.$store.dispatch('commConf', {menu: false, back: true, title: '主题'})   // 设置头部
       this.startLoading()  // 显示加载
-      // 获取主题
-      let {getConf, $route} = this
-      getConf.id = $route.params.id
-      api.getTopic(getConf)
-        .then(({data}) => {
-          if (data && data.success) {
-            this.topic = data.data
-            this.stopLoading()  // 暂停loading
-          }
-        })
-        .catch((err) => {   // 错误处理
-          this.errShow(err)
-        })
+      this.getTopic()  // 加载主题
     },
 
     computed: {
     },
 
     methods: {
+      getTopic () {
+        // 获取主题
+        let {getConf, $route} = this
+        getConf.id = $route.params.id
+        api.getTopic(getConf)
+          .then(({data}) => {
+            if (data && data.success) {
+              this.topic = data.data
+              this.stopLoading()  // 暂停loading
+            }
+          })
+          .catch((err) => {   // 错误处理
+            this.errShow(err)
+          })
+      },
+
       getTalInfo (tab, good, top, isClass) {
         return utils.getTabInfo(tab, good, top, isClass)
       },
@@ -122,11 +129,17 @@
         setTimeout(function () {
           collectable = true
         }, this.interval)
+      },
+
+      closeComment () {  // 关闭评论中的回复框
+        let {$set, topic} = this
+        topic.replies.forEach((reply) => ($set(reply, 'show_reply', false)))
       }
     },
 
     components: {
-      comList
+      comList,
+      comReplies
     }
   }
 </script>

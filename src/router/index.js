@@ -7,6 +7,7 @@ import cover from '../view/cover'   // 封面
 import Index from '../view/index'   // 首页
 import topic from '../view/topic'   // 主题页
 import userInfo from '../view/user-info'  // 用户信息
+import collectTopic from '../view/collect-topic'  // 用户收藏
 import about from '../view/about'  // 关于页面
 import login from '../view/login'  // 登录页面
 import submit from '../view/submit'  // 发布新主题
@@ -37,6 +38,14 @@ export default new Router({
       path: '/user-info/:name',
       name: 'user-info',
       component: userInfo
+    },
+    {
+      path: '/user-info/collect/:name',
+      name: 'collectTopic',
+      component: collectTopic,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/about',

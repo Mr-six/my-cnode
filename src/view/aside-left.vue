@@ -13,6 +13,16 @@
           <img :src="getUser.avatar_url" alt="头像">
           <p>{{getUser.loginname}}</p>
         </router-link>
+
+        <div class="collect-msg">
+          <router-link :to="{name: 'collectTopic', params: {name: getUser.loginname}}">
+            <i class="fa fa-star-o"></i>收藏
+          </router-link>
+          <router-link :to="{name: 'collectTopic', params: {name: getUser.loginname}}">
+            <i class="fa fa-bell-o" aria-hidden="true"></i>消息
+          </router-link>
+        </div>
+
       </div>
 
       <!-- 选项菜单 -->

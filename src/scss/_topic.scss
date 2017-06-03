@@ -74,6 +74,11 @@
         background: $job;
       }
     }
+    &.dev{
+      &:before{
+        background: $dev;
+      }
+    }
   }
 }
 // 主题内容
@@ -102,5 +107,25 @@
   // 回复点赞及回复
   .reply-ups{
     margin-top: 0.1rem;
+  }
+}
+
+// 回复评论
+.replies{
+  form{
+    margin: 0.1rem 0;
+  }
+  textarea{
+    border: 1px solid $grey-light;
+    height: 1rem;
+  }
+  .btn{
+    padding: 0.1rem 0.3rem;
+  }
+  &.reply-topic{
+    margin: 0.5rem 0 2rem;
+    textarea{
+      height: 2rem;
+    }
   }
 }

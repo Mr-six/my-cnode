@@ -24,10 +24,12 @@
             {{ reply.ups.length }}
           </p>
           <!-- 回复 -->
-          <p>
+          <p @click="showReply">
             <i class="fa fa-commenting-o" aria-hidden="true"></i>
           </p>
         </div>
+        <!-- 回复框 -->
+        <com-replies v-if="reply.show_reply" :reply_id="reply.id" :loginname="reply.author.loginname" @updata="updata"></com-replies>
       </div>
       <!-- 是否显示帖子标题 -->
       <h3 v-if="reply.title">
@@ -42,14 +44,14 @@
 <script>
   import api from '../api'
   import comMixin from '../mixins/com-mixin'
+  import comReplies from '../components/com-replies'
   import utils from '../utils/utils'
   export default {
     mixins: [comMixin],
     name: 'com-list',
     data () {
       return {
-        token: '',
-        user: {},
+        show_reply: false,
         upable: true,
         interval: 500  // 点赞时间间隔
       }
@@ -94,7 +96,20 @@
         setTimeout(function () {  // 点赞频率
           upable = true
         }, interval)
+      },
+      showReply () {
+        let {hasToken} = this
+        if (!hasToken) return this.$router.push({name: 'login'})  // 登录检测
+        let show_reply = this.reply.show_reply
+        this.$emit('close')  // 触发关闭其他回复框
+        this.reply.show_reply = !show_reply
+      },
+      updata () {  // 更新数据
+        this.$emit('updata')
       }
+    },
+    components: {
+      comReplies
     }
   }
 </script>

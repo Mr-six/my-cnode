@@ -94,8 +94,6 @@
             }
             com_conf = Object.assign(com_conf, {menu: true, back: false})
             break
-          default:
-            com_conf = Object.assign(com_conf, {menu: true, back: false, title: '全部'})
         }
         this.$store.dispatch('commConf', com_conf)
         // 关闭侧滑

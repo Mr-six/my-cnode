@@ -30,6 +30,9 @@
     mounted () {    // 加载完成后优先检测本地缓存数据
       this.startLoading()  // 显示加载
       let {getAlltopices, topices, getConf, $route} = this
+      if (!$route.query.tab) {
+        this.$router.replace({name: 'Index', query: {tab: 'all'}})
+      }
       if ($route.query && $route.query.tab) {   //  是否为特定主题
         getConf.tab = $route.query.tab
       }

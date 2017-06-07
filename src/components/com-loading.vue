@@ -1,5 +1,5 @@
 <template>
-  <div v-show="loading" class="course-loading">
+  <div v-show="loading" class="loading text-center">
     <i class="fa fa-spinner fa-spin fa-fw margin-bottom"></i>
     加载中……
   </div>

@@ -1,8 +1,5 @@
 export default {  // 公共方法
   computed: {
-    hasToken () {
-      return this.$store.getters.hasToken
-    },
     getUser () {
       return this.$store.getters.getUser
     }
@@ -15,7 +12,11 @@ export default {  // 公共方法
       this.$store.dispatch('commConf', {loading: false})
     },
     errShow (err) {
-      this.$store.dispatch('commConf', {err: true, errMes: err})
+      let {$store} = this
+      $store.dispatch('commConf', {err: true, errMes: err})
+      setTimeout(function () {
+        $store.dispatch('commConf', {err: false, errMes: ''})
+      }, 2000)
     },
     // 打开侧滑
     showAside () {

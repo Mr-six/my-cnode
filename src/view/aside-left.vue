@@ -5,11 +5,11 @@
     <aside class="aside-left" ref="aside" @touchmove.stop>
       <!-- 头像 -->
       <div class="avatar flex-item">
-        <router-link :to="{name: 'login'}" v-if="!hasToken">
+        <router-link :to="{name: 'login'}" v-if="!getUser.token">
           <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1099558373,3080843421&fm=116&gp=0.jpg" alt="头像">
           <p>请登录</p>
         </router-link>
-        <router-link :to="{name: 'user-info', params: {name: getUser.loginname}}" v-if="hasToken">
+        <router-link :to="{name: 'user-info', params: {name: getUser.loginname}}" v-if="getUser.token">
           <img :src="getUser.avatar_url" alt="头像">
           <p>{{getUser.loginname}}</p>
         </router-link>
@@ -18,7 +18,7 @@
           <router-link :to="{name: 'collectTopic', params: {name: getUser.loginname}}">
             <i class="fa fa-star-o"></i>收藏
           </router-link>
-          <router-link :to="{name: 'collectTopic', params: {name: getUser.loginname}}">
+          <router-link :to="{name: 'message', params: {name: getUser.loginname}}">
             <i class="fa fa-bell-o" aria-hidden="true"></i>消息
           </router-link>
         </div>

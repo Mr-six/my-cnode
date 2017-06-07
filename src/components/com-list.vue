@@ -67,11 +67,11 @@
     methods: {
       upsReplies () {  // 评论点赞
         let {ups, id} = this.reply
-        let {upable, interval, hasToken, getUser} = this
+        let {upable, interval, getUser} = this
         if (!upable) return
-        if (!hasToken) return this.$router.push({name: 'login'})  // 登录检测
+        if (!getUser.token) return this.$router.push({name: 'login'})  // 登录检测
         upable = false
-        api.upsReplies(hasToken, id)
+        api.upsReplies(getUser.token, id)
           .then(({data}) => {
             if (data && data.success) {
               switch (data.action) {
@@ -98,8 +98,8 @@
         }, interval)
       },
       showReply () {
-        let {hasToken} = this
-        if (!hasToken) return this.$router.push({name: 'login'})  // 登录检测
+        let {getUser} = this
+        if (!getUser.token) return this.$router.push({name: 'login'})  // 登录检测
         let show_reply = this.reply.show_reply
         this.$emit('close')  // 触发关闭其他回复框
         this.reply.show_reply = !show_reply

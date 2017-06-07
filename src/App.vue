@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <!-- 封面页 -->
+    <cover v-show="coverShow"></cover>
     <!-- 侧滑 -->
     <aside-left ref="asideLeft">
       <!-- 公共头部 -->
@@ -19,6 +21,7 @@
 </template>
 
 <script>
+  import cover from './view/cover'   // 封面
   import myHeader from './components/header'  // 公共头部组件
   import asideLeft from './view/aside-left'  // 页面侧滑组件
   import goTop from './components/com-gotop'  // 返回顶部
@@ -29,10 +32,9 @@
     name: 'main',
     data () {
       return {
-        transitionName: 'slide-left'
+        transitionName: 'slide-left',
+        coverShow: true
       }
-    },
-    methods: {
     },
 
     computed: {
@@ -48,14 +50,26 @@
     },
 
     mounted () {
-      if (this.$route.name !== 'Index' || this.$route.name !== undefined) {
-        this.$store.dispatch('commConf', {menu: false, back: true})
+      this.appShow()
+    },
+
+    methods: {
+      appShow () {
+        const { PAGE_START_TIME } = window
+        const END_TIME = new Date().getTime() // 结束时间
+        const diffTime = END_TIME - PAGE_START_TIME
+        const timer = setTimeout(() => {
+          clearTimeout(timer)
+          this.coverShow = false
+        }, diffTime > 2000 ? 0 : 2000 - diffTime)
       }
     },
+
     components: {
       myHeader,
       asideLeft,
-      goTop
+      goTop,
+      cover
     },
 
     watch: {
@@ -64,7 +78,11 @@
         // 路由切换效果判断
         const toDepth = to.path.split('/').length
         const fromDepth = from.path.split('/').length
-        this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+        if (to.name === 'Index') {
+          this.transitionName = 'slide-right'
+        } else {
+          this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+        }
 
         switch (to.name) {
           case 'Index':  // 是否为首页 对项目进行分类
@@ -77,7 +95,7 @@
             com_conf = Object.assign(com_conf, {menu: true, back: false})
             break
           default:
-            com_conf = Object.assign(com_conf, {menu: false, back: true, title: '全部'})
+            com_conf = Object.assign(com_conf, {menu: true, back: false, title: '全部'})
         }
         this.$store.dispatch('commConf', com_conf)
         // 关闭侧滑

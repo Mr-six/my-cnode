@@ -39,7 +39,14 @@
               data.token = this.token  // 添加入token
               this.$store.dispatch('singIn', data)
               layerMsg('登录成功')
-              this.$router.go(-1)  // 返回上一页
+              let redirect = this.$route.query.redirect  // 登录后跳转位置
+              if (redirect) {
+                this.$router.push({
+                  path: decodeURIComponent(redirect)
+                })
+              } else {
+                this.$router.go(-1)  // 直接回退到上一页
+              }
             } else {
               layerMsg('登录出错')
             }

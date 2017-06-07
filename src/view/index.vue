@@ -46,7 +46,6 @@
       }
 
       this.$store.dispatch('commConf', {menu: true, back: false, title: utils.getTabInfo(tab, false, false, false), plus: true, logout: false})  // 配置头部标题
-
       // 滚动加载
       window.addEventListener('scroll', this.getScrollData, false)
     },
@@ -112,6 +111,7 @@
         // 如果是当前页面切换分类的情况
         let com_conf = {}
         if (to.query && to.query.tab) {
+          this.startLoading()  // 显示加载
           let query = to.query.tab  // 是否为查询
           this.getConf.tab = to.query.tab
           this.topices = []

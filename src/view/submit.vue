@@ -43,13 +43,13 @@
 
     mounted () {
       this.$store.dispatch('commConf', {menu: false, back: true, title: '发布话题'})
-      this.form.accesstoken = this.hasToken
+      this.form.accesstoken = this.getUser.token
     },
 
     methods: {
       submit () {
-        let {form, hasToken, $router} = this
-        if (!hasToken) return $router.push({name: 'login'})  // 登录检测
+        let {form, getUser, $router} = this
+        if (!getUser.token) return $router.push({name: 'login'})  // 登录检测
         if (!form.title || !form.tab || !form.content) {
           return utils.layerMsg('主题不能存在空字段')
         } else if (form.title.length < 10) {

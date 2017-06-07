@@ -23,11 +23,11 @@ Object.keys(filters).forEach(k => Vue.filter(k, filters[k])) // 注册过滤器
 // Vue.use(Mintui)
 
 // 登录检测
-router.beforeEach(({meta, path}, from, next) => {
+router.beforeEach(({meta, path, fullPath}, from, next) => {
   const {auth = false} = meta
-  const isLogin = Boolean(store.getters.getUser)  // 检测用户是否已经登录
+  const isLogin = Boolean(store.getters.getUser.token)  // 检测用户是否已经登录
   if (auth && !isLogin && path !== '/login') {
-    let to = {path: '/login'}
+    let to = {path: '/login', query: { redirect: fullPath }}  // 保存跳转前的下一个位置
     return next(to)  // 中断导航，跳转到登录界面
   }
   next()

@@ -109,7 +109,6 @@ export default {
    * @return {promise}            {"success": true}
    */
   getCollectTopic (loginname) {
-    console.log(loginname)
     return axios.get('/api/topic_collect/' + loginname)
   },
 
@@ -159,32 +158,27 @@ export default {
     })
   },
 
-// {
-//   "success": true,
-//   "loginname": "Mr-six",
-//   "avatar_url": "https://avatars2.githubusercontent.com/u/16644635?v=3&s=120",
-//   "id": "58d08b6017f61387400b7db5"
-// }
-
   /**
    * 获取未读消息数
    * @param  {Sting} accesstoken token值
    * @return {promise}           { data: 3 }
    */
-  getUnreadMessage ({accesstoken}) {
-    return axios.post('/api/message/count', {
-      accesstoken: accesstoken
+  getUnreadMessage (accesstoken) {
+    return axios.get('/api/message/count', {
+      params: {
+        accesstoken: accesstoken
+      }
     })
   },
 
    /**
-   * 获取所有消息数
+   * 获取所有消息数(已读和未读)
    * @param  {Sting} accesstoken token值
    * @param  {String} mdrender    当为 false 时，不渲染。默认为 true，渲染出现的所有 markdown 格式文本
    * @return {promise}           { data: []}
    */
-  getAllMessage ({accesstoken, mdrender}) {
-    return axios.get('/api/message/count', {
+  getAllMessage (accesstoken, mdrender) {
+    return axios.get('/api/messages', {
       params: {
         accesstoken: accesstoken,
         mdrender: mdrender
@@ -198,8 +192,23 @@ export default {
    * @return {promise}           { success: true,
   marked_msgs: [ { id: '544ce385aeaeb5931556c6f9' } ] }
    */
-  readAllMessage ({accesstoken}) {
+  readAllMessage (accesstoken) {
     return axios.post('/api/message/mark_all', {
+      accesstoken: accesstoken
+    })
+  },
+
+  /**
+   * 标记单个消息为已读
+   * @param  {String} accesstoken token值
+   * @param  {String} msg_id      消息id
+   * @return {[type]}             obj {
+  success: true,
+  marked_msg_id: "58ec7d39da8344a81eee0c14"
+}
+   */
+  markOneMessage (accesstoken, msg_id) {
+    return axios.post('/message/mark_one/' + msg_id, {
       accesstoken: accesstoken
     })
   }

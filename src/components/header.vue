@@ -31,8 +31,8 @@
         this.$router.go(-1)
       },
       submit () {  // 发帖
-        let {hasToken, $router} = this
-        if (hasToken) {  // 登录检测
+        let {getUser, $router} = this
+        if (getUser.token) {  // 登录检测
           $router.push({name: 'submit'})
         } else {
           $router.push({name: 'login'})

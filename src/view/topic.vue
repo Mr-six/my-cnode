@@ -33,7 +33,14 @@
         </li>
         <com-list v-for="reply in topic.replies" :key="reply.id" :reply="reply" class="topic-reply" @close="closeComment" @updata="getTopic"></com-list>
         <!-- 回复框 -->
-        <com-replies v-if="hasToken" @updata="getTopic" class="reply-topic"></com-replies>
+        <com-replies v-if="getUser.token" @updata="getTopic" class="reply-topic"></com-replies>
+        <!-- 登录提示 -->
+        <div v-if="!getUser.token" class="login-tip flex-center-all">
+          <p>
+            <router-link :to="{name: 'login'}" class="link">登录</router-link>
+            后参与讨论
+          </p>
+        </div>
       </ul>
     </div>
 
@@ -63,7 +70,7 @@
     },
 
     mounted () {
-      this.getConf.accesstoken = this.hasToken || ''  // 添加token
+      this.getConf.accesstoken = this.getUser.token || ''  // 添加token
       this.$store.dispatch('commConf', {menu: false, back: true, title: '主题'})   // 设置头部
       this.startLoading()  // 显示加载
       this.getTopic()  // 加载主题
@@ -94,14 +101,14 @@
       },
 
       collectTopic () {  // 主题收藏逻辑
-        let {hasToken, collectable, topic} = this
+        let {getUser, collectable, topic} = this
         let topic_id = topic.id
         if (!collectable) return
         let postData = {
-          accesstoken: hasToken,
+          accesstoken: getUser.token,
           topic_id: topic_id
         }
-        if (!hasToken) return this.$router.push({name: 'login'})  // 登录检测
+        if (!getUser.token) return this.$router.push({name: 'login'})  // 登录检测
         collectable = false  // 控制收藏频率
         if (this.topic.is_collect) {  // 取消收藏
           api.deCollectTopic(postData)

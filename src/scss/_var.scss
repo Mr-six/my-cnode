@@ -3,7 +3,7 @@ $theme: #80bd01;
 $theme-dark: darken($theme, 10%);
 $top: #E74C3C;
 $good: #e67e22;
-$share: #04BFBF;
+$share: #FF974F;
 $ask: #00A388;
 $job: #6D378A;
 $dev: #3498DB;
@@ -32,6 +32,9 @@ $aside-menu-bg: #434a54;
 }
 .up {
   color: $up;
+}
+.link{
+  color: $link;
 }
 
 

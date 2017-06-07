@@ -41,7 +41,7 @@
     },
 
     mounted () {
-      this.form.accesstoken = this.hasToken  // token
+      this.form.accesstoken = this.getUser.token  // token
       this.form.topic_id = this.$route.params.id
       this.form.reply_id = this.reply_id
     },

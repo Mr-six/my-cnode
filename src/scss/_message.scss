@@ -1,0 +1,14 @@
+#message{
+  .tab-btn{
+    margin: 0;
+  }
+  a{
+    color: $link;
+  }
+  .markdown-body{
+    background: $grey-light;
+    padding: 0.1rem;
+    border-radius: 0.05rem;
+    margin-top: 0.1rem;
+  }
+}

@@ -1,9 +1,12 @@
 import axios from 'axios'
 
-// token: e29b153b-b287-456a-909f-badfde460b8c
+const defaults = {
+  baseURL: 'https://cnodejs.org/api/v1/'
+}
+Object.assign(axios.defaults, defaults)
 
 export default {
-  // 所有API来着 (cnodejs API)[https://cnodejs.org/api]
+  // 所有api来着 (cnodejs api)[https://cnodejs.org/api]
 
   /**
    * 获取首页主题
@@ -14,7 +17,7 @@ export default {
    * @return {promise}         {success: true, data: []} 根据success 的值来判断是否请求成功
    */
   getTopics ({page, tab, limit, mdrender}) {
-    return axios.get('/api/topics', {
+    return axios.get('/topics', {
       params: {
         page: page,
         tab: tab,
@@ -32,7 +35,7 @@ export default {
    * @return {promise}             {success: true, data: []} 根据success 的值来判断是否请求成功
    */
   getTopic ({id, mdrender, accesstoken}) {
-    return axios.get('/api/topic/' + id, {
+    return axios.get('/topic/' + id, {
       params: {
         mdrender: mdrender,
         accesstoken: accesstoken
@@ -49,7 +52,7 @@ export default {
    * @return {promise}            {success: true, topic_id: '5433d5e4e737cbe96dcef312'}
    */
   creatTopic ({accesstoken, title, tab, content}) {
-    return axios.post('/api/topics', {
+    return axios.post('/topics', {
       accesstoken: accesstoken,
       title: title,
       tab: tab,
@@ -67,7 +70,7 @@ export default {
    * @return {promise}            {success: true, topic_id: '5433d5e4e737cbe96dcef312'}
    */
   updateTopic ({accesstoken, topic_id, title, tab, content}) {
-    return axios.post('/api/topics/update', {
+    return axios.post('/topics/update', {
       accesstoken: accesstoken,
       topic_id: topic_id,
       title: title,
@@ -83,7 +86,7 @@ export default {
    * @return {promise}            {"success": true}
    */
   collectTopic ({accesstoken, topic_id}) {
-    return axios.post('/api/topic_collect/collect', {
+    return axios.post('/topic_collect/collect', {
       accesstoken: accesstoken,
       topic_id: topic_id
     })
@@ -96,7 +99,7 @@ export default {
    * @return {promise}            {"success": true}
    */
   deCollectTopic ({accesstoken, topic_id}) {
-    return axios.post('/api/topic_collect/de_collect', {
+    return axios.post('/topic_collect/de_collect', {
       accesstoken: accesstoken,
       topic_id: topic_id
     })
@@ -109,7 +112,7 @@ export default {
    * @return {promise}            {"success": true}
    */
   getCollectTopic (loginname) {
-    return axios.get('/api/topic_collect/' + loginname)
+    return axios.get('/topic_collect/' + loginname)
   },
 
   /**
@@ -120,7 +123,7 @@ export default {
    * @return {promise}            {success: true, reply_id: '5433d5e4e737cbe96dcef312'}
    */
   createReplies ({accesstoken, content, topic_id, reply_id}) {
-    return axios.post('/api/topic/' + topic_id + '/replies', {
+    return axios.post('/topic/' + topic_id + '/replies', {
       accesstoken: accesstoken,
       content: content,
       reply_id: reply_id
@@ -133,7 +136,7 @@ export default {
    * @return {promise}            {"success": true, "action": "down"} 接口会自动判断用户是否已点赞 如果否，则点赞；如果是，则取消点赞。点赞的动作反应在返回数据的 action 字段中：up or down。
    */
   upsReplies (accesstoken, reply_id) {
-    return axios.post('/api/reply/' + reply_id + '/ups', {
+    return axios.post('/reply/' + reply_id + '/ups', {
       accesstoken: accesstoken
     })
   },
@@ -144,7 +147,7 @@ export default {
    * @return {promise}    {"success":true,"data":"[……]"}
    */
   getUuser (name) {
-    return axios.get('/api/user/' + name)
+    return axios.get('/user/' + name)
   },
 
   /**
@@ -153,7 +156,7 @@ export default {
    * @return {promise}            如果成功匹配上用户，返回成功信息。否则 403 {success: true, loginname: req.user.loginname, id: req.user.id, avatar_url: req.user.avatar_url}
    */
   accessToken (accesstoken) {
-    return axios.post('/api/accesstoken', {
+    return axios.post('/accesstoken', {
       accesstoken: accesstoken
     })
   },
@@ -164,7 +167,7 @@ export default {
    * @return {promise}           { data: 3 }
    */
   getUnreadMessage (accesstoken) {
-    return axios.get('/api/message/count', {
+    return axios.get('/message/count', {
       params: {
         accesstoken: accesstoken
       }
@@ -178,7 +181,7 @@ export default {
    * @return {promise}           { data: []}
    */
   getAllMessage (accesstoken, mdrender) {
-    return axios.get('/api/messages', {
+    return axios.get('/messages', {
       params: {
         accesstoken: accesstoken,
         mdrender: mdrender
@@ -193,7 +196,7 @@ export default {
   marked_msgs: [ { id: '544ce385aeaeb5931556c6f9' } ] }
    */
   readAllMessage (accesstoken) {
-    return axios.post('/api/message/mark_all', {
+    return axios.post('/message/mark_all', {
       accesstoken: accesstoken
     })
   },

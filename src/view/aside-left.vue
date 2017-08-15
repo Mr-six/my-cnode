@@ -7,7 +7,7 @@
       <div class="avatar flex-item">
         <router-link :to="{name: 'login'}" v-if="!getUser.token">
           <img src="https://avatars2.githubusercontent.com/u/16644635?v=4&s=460" alt="头像">
-          <p>请登录</p>
+          <p>请先登录</p>
         </router-link>
         <router-link :to="{name: 'user-info', params: {name: getUser.loginname}}" v-if="getUser.token">
           <img :src="getUser.avatar_url" alt="头像">

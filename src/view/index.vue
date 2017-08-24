@@ -83,8 +83,9 @@
         if (this.scrollGet) {
           let totalHeight = document.body.scrollHeight   // 页面总高度
           let devHeight = document.documentElement.clientHeight  // 手机屏幕高度
-          let pageScrollTop = document.documentElement.scrollTop  // 手机页面滚动距离
-          if (totalHeight - devHeight - pageScrollTop <= 200) {  // 触发距离
+          let pageScrollTop = document.documentElement.scrollTop || document.body.scrollTop  // 手机页面滚动距离
+          let dis = totalHeight - devHeight - pageScrollTop
+          if (dis <= 200) {  // 触发距离
             this.getConf.page++
             this.getAlltopices()
             this.scrollGet = false

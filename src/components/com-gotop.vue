@@ -28,7 +28,7 @@
       goTop () {
         let {speeds, interval} = this
         function getTop () {  // 获取页面滚动距离
-          return document.documentElement.scrollTop  // 手机页面滚动距离
+          return document.documentElement.scrollTop || document.body.scrollTop  // 手机页面滚动距离
         }
         function doGoTop () {
           let timer
@@ -38,7 +38,7 @@
           } else {
             let speed = Math.ceil(getTop() / speeds)
             timer = setTimeout(function () {
-              document.documentElement.scrollTop -= speed
+              document.documentElement.scrollTop ? (document.documentElement.scrollTop -= speed) : (document.body.scrollTop -= speed)
               doGoTop()
             }, interval)
           }
@@ -47,7 +47,7 @@
       },
 
       checkShow () {  // 是否显示
-        let pageScrollTop = document.documentElement.scrollTop  // 手机页面滚动距离
+        let pageScrollTop = document.documentElement.scrollTop || document.body.scrollTop  // 手机页面滚动距离
         if (pageScrollTop > this.distance) {
           this.showGoTop = true
         } else {
